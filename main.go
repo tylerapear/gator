@@ -42,6 +42,8 @@ func main() {
 	commandsMap.Register("login", commands.HandlerLogin)
 	commandsMap.Register("register", commands.HandlerRegister)
 	commandsMap.Register("reset", commands.HandlerReset)
+	commandsMap.Register("users", commands.HandlerUsers)
+	commandsMap.Register("agg", commands.HandlerAgg)
 
 	args := os.Args
 	if len(args) < 2 {
