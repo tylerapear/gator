@@ -46,6 +46,8 @@ func main() {
 	commandsMap.Register("agg", commands.HandlerAgg)
 	commandsMap.Register("addfeed", commands.HandlerAddFeed)
 	commandsMap.Register("feeds", commands.HandlerFeeds)
+	commandsMap.Register("follow", commands.HandlerFollow)
+	commandsMap.Register("following", commands.HandlerFollowing)
 
 	args := os.Args
 	if len(args) < 2 {
