@@ -15,10 +15,8 @@ import (
 func HandlerRegister(s *state.State, cmd Command) error {
 
 	if cmd.Args == nil || len(cmd.Args) < 1 {
-		return fmt.Errorf("name argument is required")
+		return fmt.Errorf("usage: register <name>")
 	}
-
-	fmt.Println(cmd.Args)
 
 	params := database.CreateUserParams{
 		ID:  uuid.New(),

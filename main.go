@@ -44,6 +44,8 @@ func main() {
 	commandsMap.Register("reset", commands.HandlerReset)
 	commandsMap.Register("users", commands.HandlerUsers)
 	commandsMap.Register("agg", commands.HandlerAgg)
+	commandsMap.Register("addfeed", commands.HandlerAddFeed)
+	commandsMap.Register("feeds", commands.HandlerFeeds)
 
 	args := os.Args
 	if len(args) < 2 {
