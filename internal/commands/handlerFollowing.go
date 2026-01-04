@@ -5,14 +5,10 @@ import (
 	"context"
 	
 	"gator/internal/state"
+	"gator/internal/database"
 )
 
-func HandlerFollowing(s *state.State, cmd Command) error {
-
-	currentUser, err := s.DB.GetUser(context.Background(), s.Config.CurrentUserName)
-	if err != nil {
-		return err
-	}
+func HandlerFollowing(s *state.State, cmd Command, currentUser database.User) error {
 
 	feedFollows, err := s.DB.GetFeedFollowsForUser(context.Background(), currentUser.ID)
 	if err != nil {

@@ -44,10 +44,11 @@ func main() {
 	commandsMap.Register("reset", commands.HandlerReset)
 	commandsMap.Register("users", commands.HandlerUsers)
 	commandsMap.Register("agg", commands.HandlerAgg)
-	commandsMap.Register("addfeed", commands.HandlerAddFeed)
+	commandsMap.Register("addfeed", middlewareLoggedIn(commands.HandlerAddFeed))
 	commandsMap.Register("feeds", commands.HandlerFeeds)
-	commandsMap.Register("follow", commands.HandlerFollow)
-	commandsMap.Register("following", commands.HandlerFollowing)
+	commandsMap.Register("follow", middlewareLoggedIn(commands.HandlerFollow))
+	commandsMap.Register("following", middlewareLoggedIn(commands.HandlerFollowing))
+	commandsMap.Register("unfollow", middlewareLoggedIn(commands.HandlerUnfollow))
 
 	args := os.Args
 	if len(args) < 2 {

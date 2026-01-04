@@ -11,17 +11,13 @@ import (
 	"github.com/google/uuid"
 )
 
-func HandlerFollow(s *state.State, cmd Command) error {
+func HandlerFollow(s *state.State, cmd Command, currentUser database.User) error {
 
 	if cmd.Args == nil || len(cmd.Args) < 1 {
 		return fmt.Errorf("usage: follow <url>")
 	}
 
 	feed, err := s.DB.GetFeedByURL(context.Background(), cmd.Args[0])
-	if err != nil {
-		return err
-	}
-	currentUser, err := s.DB.GetUser(context.Background(), s.Config.CurrentUserName)
 	if err != nil {
 		return err
 	}

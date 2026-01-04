@@ -11,7 +11,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func HandlerAddFeed(s *state.State, cmd Command) error {
+func HandlerAddFeed(s *state.State, cmd Command, currentUser database.User) error {
 
 	if cmd.Args == nil || len(cmd.Args) < 2 {
 		return fmt.Errorf("usage: addfeed <name> <url>")
@@ -19,11 +19,6 @@ func HandlerAddFeed(s *state.State, cmd Command) error {
 
 	feedName := cmd.Args[0]
 	feedURL := cmd.Args[1]
-
-	currentUser, err := s.DB.GetUser(context.Background(), s.Config.CurrentUserName)
-	if err != nil {
-		return err
-	}
 
 	paramsCreate := database.CreateFeedParams{
 		ID:  uuid.New(),
