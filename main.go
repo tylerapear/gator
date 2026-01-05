@@ -49,6 +49,7 @@ func main() {
 	commandsMap.Register("follow", middlewareLoggedIn(commands.HandlerFollow))
 	commandsMap.Register("following", middlewareLoggedIn(commands.HandlerFollowing))
 	commandsMap.Register("unfollow", middlewareLoggedIn(commands.HandlerUnfollow))
+	commandsMap.Register("browse", middlewareLoggedIn(commands.HandlerBrowse))
 
 	args := os.Args
 	if len(args) < 2 {
