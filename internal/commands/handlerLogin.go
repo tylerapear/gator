@@ -16,7 +16,7 @@ func HandlerLogin(s *state.State, cmd Command) error {
 
 	_, err := s.DB.GetUser(context.Background(), username)
 	if err != nil {
-		return fmt.Errorf("failed to get user: %v", err)
+		return fmt.Errorf("Failed to get user. Check if the user is registered by running: `gator users`")
 	}
 
 	err = s.Config.SetUser(username)

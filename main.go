@@ -15,9 +15,29 @@ import (
 
 func main() {
 
+	args := os.Args
+	if len(args) < 2 {
+		fmt.Println("No command provided")
+		os.Exit(1)
+	}
+
+	cmd := commands.Command{
+		Name: args[1],
+		Args: args[2:],
+	}
+
+	if cmd.Name == "init" {
+		err := commands.HandlerInit(cmd)
+		if err != nil {
+			fmt.Printf("Error initializing: %v\n", err)
+		}
+		return
+	}
+
 	cfg, err := config.Read()
 	if err != nil {
-		fmt.Println("Error reading config:", err)
+		fmt.Printf("Error reading config: %v\n", err)
+		fmt.Println("Make sure gator is initialized: 'gator init <database url>'")
 		return
 	}
 
@@ -50,17 +70,6 @@ func main() {
 	commandsMap.Register("following", middlewareLoggedIn(commands.HandlerFollowing))
 	commandsMap.Register("unfollow", middlewareLoggedIn(commands.HandlerUnfollow))
 	commandsMap.Register("browse", middlewareLoggedIn(commands.HandlerBrowse))
-
-	args := os.Args
-	if len(args) < 2 {
-		fmt.Println("No command provided")
-		os.Exit(1)
-	}
-
-	cmd := commands.Command{
-		Name: args[1],
-		Args: args[2:],
-	}
 
 	err = commandsMap.Run(&currentState, cmd)
 	if err != nil {

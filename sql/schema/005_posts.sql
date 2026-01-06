@@ -11,6 +11,7 @@ CREATE TABLE posts (
     CONSTRAINT fk_feed
         FOREIGN KEY (feed_id)
         REFERENCES feeds(id)
+        ON DELETE CASCADE
 );
 
 -- +goose Down
